@@ -1,184 +1,807 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* =========================================
+   RESET
+========================================= */
 
-  &:hover {
-    border-color: var(--accent-border);
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color: #443b3e;
+
+  background-color: #fff0f5;
+
+  background-image:
+    radial-gradient(#e6b9c9 1px, transparent 1px),
+    radial-gradient(#e6b9c9 1px, transparent 1px);
+
+  background-position: 0 0, 12px 12px;
+  background-size: 24px 24px;
+
+  animation: backgroundMove 12s linear infinite;
+}
+
+
+/* =========================================
+   ANIMACIONES
+========================================= */
+
+@keyframes backgroundMove {
+  from {
+    background-position: 0 0, 12px 12px;
   }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+
+  to {
+    background-position: 24px 24px, 36px 36px;
   }
 }
 
-.hero {
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: .5;
+    transform: scale(.8) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(20deg);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================
+   APP
+========================================= */
+
+.app {
+  width: 90%;
+  max-width: 650px;
+
+  margin: 35px auto;
+
+  background-color: #ffe1ea;
+
+  border: 3px solid #373335;
+  border-radius: 27px;
+
+  overflow: hidden;
+
+  box-shadow: 7px 7px 0 #373335;
+
   position: relative;
 
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
+  animation: slideUp .7s ease both;
 
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
 }
 
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+.app:hover {
+  box-shadow: 10px 10px 0 #373335;
 }
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
 
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
+/* =========================================
+   BARRA SUPERIOR
+========================================= */
 
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
+.app::before {
+  content:
+    "✿  by React.carrd.co                 ♡  ◡  ✉";
 
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+  display: block;
+
+  height: 43px;
+  padding: 10px 17px;
+
+  background-color: #49343d;
+
+  color: #ffe9f0;
+
+  border-bottom: 3px solid #2b2528;
+
+  font-size: 13px;
+  letter-spacing: .5px;
+
+  white-space: pre;
+
+  box-shadow: inset 0 -2px 0 #6c515b;
+
+  animation: pulse 4s ease-in-out infinite;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
 
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
+/* =========================================
+   TÍTULO
+========================================= */
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
+.app h1 {
+  margin: 0;
 
-  .logo {
-    height: 18px;
-  }
+  padding: 18px 20px 16px;
 
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
+  background-color: #f4a9c0;
 
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
+  color: #493e42;
 
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
+  border-bottom: 3px dotted #7b5361;
 
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
+  text-align: center;
 
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
-}
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: bold;
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
   position: relative;
+}
+
+.app h1::first-letter {
+  color: #a64465;
+}
+
+
+/* =========================================
+   WELCOME
+========================================= */
+
+.app h1::after {
+  content: "( ˶ˆᗜˆ˵ ) ♡ welcome to my card! ♡";
+
+  display: block;
+
+  width: 85%;
+
+  margin: 13px auto 0;
+
+  padding: 8px 12px;
+
+  background-color: #fff5f8;
+
+  border: 2px solid #4a4043;
+
+  border-radius: 30px;
+
+  font-size: 13px;
+  font-weight: normal;
+
+  box-shadow: 2px 2px 0 #4a4043;
+
+  transition:
+    transform .3s ease,
+    background-color .3s ease;
+}
+
+.app h1:hover::after {
+  transform: scale(1.04) rotate(-1deg);
+  background-color: #ffffff;
+}
+
+
+/* =========================================
+   SEPARADORES
+========================================= */
+
+.app > hr {
+  height: 17px;
+
+  margin: 0;
+
+  border: none;
+
+  background-color: #f7c4d5;
+
+  border-top: 2px dotted #805866;
+  border-bottom: 2px dotted #805866;
+
+  background-image:
+    radial-gradient(#b96d86 1px, transparent 1px);
+
+  background-size: 7px 7px;
+
+  animation: backgroundMove 5s linear infinite;
+}
+
+
+/* =========================================
+   FILAS
+========================================= */
+
+.app__row {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 13px;
+
+  padding: 48px 20px 23px;
+
+  position: relative;
+
+  border-bottom: 3px dotted #8e5f6d;
+
+  transition:
+    background-color .4s ease,
+    padding .3s ease;
+}
+
+.app__row:hover {
+  padding-top: 51px;
+  padding-bottom: 26px;
+}
+
+
+/* =========================================
+   FONDOS
+========================================= */
+
+.app__row:nth-of-type(1) {
+  background-color: #f6b7ca;
+}
+
+.app__row:nth-of-type(2) {
+  background-color: #ffdce7;
+}
+
+.app__row:nth-of-type(3) {
+  background-color: #f9d2df;
+}
+
+.app__row:nth-of-type(4) {
+  background-color: #f4c4d5;
+}
+
+.app__row:nth-of-type(5) {
+  background-color: #f8dce5;
+}
+
+.app__row:nth-of-type(6) {
+  background-color: #f2c2d1;
+}
+
+
+/* =========================================
+   ETIQUETAS DE SECCIÓN
+========================================= */
+
+.app__row::before {
+  position: absolute;
+
+  top: 10px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  min-width: 175px;
+
+  padding: 6px 16px;
+
+  background-color: #fff6f8;
+
+  border: 2px solid #704b58;
+  border-radius: 20px;
+
+  color: #9e4e6a;
+
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: .5px;
+
+  text-align: center;
+
+  box-shadow: 3px 3px 0 #704b58;
+
+  z-index: 2;
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    background-color .3s ease;
+}
+
+.app__row:hover::before {
+  transform: translateX(-50%) scale(1.07) rotate(-1deg);
+
+  background-color: #ffffff;
+
+  box-shadow: 5px 5px 0 #704b58;
+}
+
+
+/* =========================================
+   NOMBRES
+========================================= */
+
+.app__row:nth-of-type(1)::before {
+  content: "♡  EMPLEADO  ♡";
+}
+
+.app__row:nth-of-type(2)::before {
+  content: "✿  AUTOMÓVIL  ✿";
+}
+
+.app__row:nth-of-type(3)::before {
+  content: "♡  EMPRESA  ♡";
+}
+
+.app__row:nth-of-type(4)::before {
+  content: "✿  PELÍCULA  ✿";
+}
+
+.app__row:nth-of-type(5)::before {
+  content: "♡  VIDEOJUEGO  ♡";
+}
+
+.app__row:nth-of-type(6)::before {
+  content: "✿  PERSONA PRINCIPAL  ✿";
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.card {
+  width: 175px;
+
+  padding: 10px;
+
+  background-color: #fff3f6;
+
+  border: 3px solid #423a3c;
+  border-radius: 15px;
+
+  box-shadow: 4px 4px 0 #423a3c;
+
+  text-align: center;
+
+  position: relative;
+
+  transition:
+    transform .3s cubic-bezier(.2,.8,.2,1),
+    box-shadow .3s ease,
+    background-color .3s ease;
+
+  animation: float 4s ease-in-out infinite;
+}
+
+
+/* Cada tarjeta flota a distinto ritmo */
+
+.card:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.card:nth-child(2) {
+  animation-delay: .5s;
+}
+
+.card:nth-child(3) {
+  animation-delay: 1s;
+}
+
+
+/* =========================================
+   DECORACIÓN
+========================================= */
+
+.card::before {
+  content: "✿";
+
+  position: absolute;
+
+  top: 4px;
+  left: 7px;
+
+  color: #d15f84;
+
+  font-size: 12px;
+
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.card::after {
+  content: "♡";
+
+  position: absolute;
+
+  right: 7px;
+  top: 4px;
+
+  color: #d15f84;
+
+  font-size: 13px;
+
+  animation: sparkle 2.5s ease-in-out infinite;
+}
+
+
+/* =========================================
+   HOVER CARD
+========================================= */
+
+.card:hover {
+  transform:
+    translateY(-10px)
+    rotate(-2deg)
+    scale(1.04);
+
+  box-shadow:
+    7px 8px 0 #423a3c;
+
+  background-color: #fffaff;
+
+  z-index: 5;
+}
+
+
+/* =========================================
+   TÍTULO CARD
+========================================= */
+
+.card h2 {
+  margin: 4px 15px 3px;
+
+  color: #a64465;
+
+  font-size: 17px;
+  line-height: 1.15;
+
+  transition:
+    color .2s ease,
+    transform .2s ease;
+}
+
+.card:hover h2 {
+  color: #d13f70;
+
+  transform: scale(1.05);
+}
+
+
+/* =========================================
+   SUBTÍTULO
+========================================= */
+
+.card h3 {
+  margin: 0 4px 8px;
+
+  color: #765963;
+
+  font-size: 12px;
+  font-weight: normal;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================
+   IMAGEN
+========================================= */
+
+.card img {
+  display: block;
+
   width: 100%;
+  height: 125px;
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+  object-fit: cover;
+
+  margin: 7px auto 2px;
+
+  border: 3px solid #433b3d;
+
+  border-radius: 10px;
+
+  background-color: #f1d8e0;
+
+  transition:
+    transform .35s ease,
+    filter .35s ease,
+    border-radius .35s ease;
+}
+
+.card:hover img {
+  transform: scale(1.06) rotate(1deg);
+
+  filter:
+    saturate(1.15)
+    brightness(1.05);
+
+  border-radius: 14px;
+}
+
+
+/* =========================================
+   MODIFICADORES
+========================================= */
+
+.card--empleado {
+  background-color: #ffd5e1;
+}
+
+.card--empleado h2 {
+  color: #a94364;
+}
+
+
+.card--auto {
+  background-color: #ffe0e9;
+}
+
+.card--auto h2 {
+  color: #b04e70;
+}
+
+
+.card--empresa {
+  background-color: #ffd9e4;
+}
+
+.card--empresa h2 {
+  color: #a74767;
+}
+
+
+.card--pelicula {
+  background-color: #f7d2df;
+}
+
+.card--pelicula h2 {
+  color: #954e6c;
+}
+
+
+.card--videojuego {
+  background-color: #ffdae6;
+}
+
+.card--videojuego h2 {
+  color: #a34568;
+}
+
+
+.card--p-principal {
+  background-color: #ffd0dc;
+}
+
+.card--p-principal h2 {
+  color: #a24d62;
+}
+
+
+/* =========================================
+   ANIMACIÓN DE ENTRADA DE LAS CARDS
+========================================= */
+
+.app__row .card {
+  opacity: 0;
+  animation:
+    cardAppear .7s ease forwards,
+    float 4s ease-in-out infinite;
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(.9);
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(-1deg);
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+}
+
+.app__row .card:nth-child(1) {
+  animation-delay: .15s, .8s;
+}
+
+.app__row .card:nth-child(2) {
+  animation-delay: .3s, 1s;
+}
+
+.app__row .card:nth-child(3) {
+  animation-delay: .45s, 1.2s;
+}
+
+
+/* =========================================
+   DECORACIÓN ENTRE TARJETAS
+========================================= */
+
+.app__row .card:nth-child(1) {
+  transform: rotate(-1deg);
+}
+
+.app__row .card:nth-child(2) {
+  transform: rotate(1deg);
+}
+
+.app__row .card:nth-child(3) {
+  transform: rotate(-.5deg);
+}
+
+
+/* =========================================
+   HOVER CORREGIDO
+========================================= */
+
+.app__row .card:nth-child(1):hover,
+.app__row .card:nth-child(2):hover,
+.app__row .card:nth-child(3):hover {
+  transform:
+    translateY(-10px)
+    rotate(0deg)
+    scale(1.04);
+
+  box-shadow: 7px 8px 0 #423a3c;
+}
+
+
+/* =========================================
+   PARTE FINAL
+========================================= */
+
+.app::after {
+  content:
+    "♡  Samantha Anali Ponce Piñon ✿ 5Q  ♡";
+
+  display: block;
+
+  padding: 17px 10px;
+
+  background-color: #49343d;
+
+  border-top: 3px solid #2b2528;
+
+  color: #ffeaf0;
+
+  text-align: center;
+
+  font-size: 11px;
+  letter-spacing: .5px;
+
+  transition:
+    background-color .3s ease,
+    letter-spacing .3s ease;
+}
+
+.app:hover::after {
+  background-color: #5b3d49;
+  letter-spacing: 1px;
+}
+
+
+/* =========================================
+   EFECTO DE BRILLO
+========================================= */
+
+.card {
+  overflow: hidden;
+}
+
+.card:hover::marker {
+  display: none;
+}
+
+.card:hover {
+  box-shadow:
+    7px 8px 0 #423a3c,
+    0 0 18px rgba(255, 130, 170, .25);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .app {
+    width: 94%;
+    margin: 15px auto;
+  }
+
+  .app h1 {
+    font-size: 17px;
+  }
+
+  .app h1::after {
+    width: 95%;
+    font-size: 11px;
+  }
+
+  .app__row {
+    padding: 45px 10px 20px;
+    gap: 12px;
+  }
+
+  .app__row:hover {
+    padding-top: 47px;
+    padding-bottom: 22px;
+  }
+
+  .app__row::before {
+    min-width: 145px;
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+
+  .card {
+    width: 145px;
+  }
+
+  .card img {
+    height: 105px;
+  }
+
+  .card h2 {
+    font-size: 14px;
+  }
+
+  .card h3 {
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================
+   REDUCIR ANIMACIONES SI EL USUARIO
+   LO TIENE CONFIGURADO
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
   }
 }
